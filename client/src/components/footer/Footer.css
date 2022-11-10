@@ -1,0 +1,18 @@
+.footerContainer{
+    width: 100vw;
+    height: 80px;
+    background-color: #b71e3f;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+}
+
+.icons{
+    font-size: 40px;
+    cursor: pointer;
+    color: white;
+}
