@@ -16,3 +16,18 @@
     cursor: pointer;
     color: white;
 }
+
+#hamburgerBox{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 10px;
+}
+
+.profilePosition{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}

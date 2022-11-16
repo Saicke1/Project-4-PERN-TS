@@ -1,9 +1,10 @@
-import * as pg from "pg";
 import * as dotenv from "dotenv";
+import * as pg from "pg";
+import Sequelize from "sequelize";
 
-dotenv.config();
+dotenv.config({ path: "./.env.local" });
 
-const { Pool } = pg;
+const { Pool } = pg.default;
 
 const pool = new Pool({
   user: process.env.DB_USER,

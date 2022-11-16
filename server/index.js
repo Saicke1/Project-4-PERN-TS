@@ -1,21 +1,24 @@
-import express from "express";
 //const express = require("express"); alter import, nicht nötig weil im package.json the type: module eingetragen ist
+import express from "express";
 import userRoutes from "./routes/userRoutes.js";
+import hotelRoutes from "./routes/hotelRoutes.js";
 import cors from "cors";
+import pool from "./dbConfig.js";
 console.log("Console log nodemon is working.");
 
 //create express app
 const app = express();
 
+//middleware
 app.use(cors());
-app.use(express.json());
+app.use(express.json()); //req.body
 app.use(
   express.urlencoded({
     extended: true,
   })
 );
 
-//instantiate router deature and add it to the express app
+//instantiate router depature and add it to the express app
 const router = express.Router();
 app.use(router);
 
@@ -26,16 +29,12 @@ app.get("/", (req, res) => {
 }); */
 
 //write GET route for HOME Page
-router.get("/", (req, res) => {
+/* router.get("/", (req, res) => {
   res.send({ msg: "Homepage route is working!" });
-});
+}); */
 
-//write GET route for TEST Page
-router.get("/test", (req, res) => {
-  res.send({ msg: "Test route is working!" });
-});
-
-app.use("/users", userRoutes);
+app.use("/user", userRoutes);
+app.use("/hotel", hotelRoutes);
 
 //define the port of our server
 app.listen(5000, () => {

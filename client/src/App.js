@@ -4,7 +4,15 @@ import { ThemeProvider, createTheme } from "@material-ui/core/styles";
 import Layout from "./views/Layout";
 import NoPage from "./views/NoPage";
 import Homepage from "./components/homepage/Homepage";
-import ListPage from "./components/listPage/ListPage";
+import ListPage from "./components/hotelsListPage/HotelsListPage";
+import ProfilePage from "./components/userPages/profilePage/ProfilePage";
+import DetailsPage from "./components/detailsPage/DetailsPage";
+import LogoutPage from "./components/userPages/logoutPage/LogoutPage";
+import LoginPage from "./components/userPages/loginPage/LoginPage";
+import RegistrationPage from "./components/userPages/registrationPage/RegistrationPage";
+import AuthContext from "./components/context/AuthContext";
+import UpdatePage from "./components/userPages/updatePage/UpdatePage";
+/* import AuthContext from "./components/context/AuthContext.tsx"; */
 
 const theme = createTheme({
   typography: {
@@ -16,13 +24,23 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <div className="AppContainer">
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<Homepage />} />
-            <Route path="listHotels" element={<ListPage />} />
-            <Route path="*" element={<NoPage />} />
-          </Route>
-        </Routes>
+        <AuthContext>
+       {/*  <AuthContext> */}
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<Homepage />} />
+              <Route path="listHotels" element={<ListPage />} />
+              <Route path="profile" element={<ProfilePage />} />
+              <Route path="details" element={<DetailsPage />} />
+              <Route path="logout" element={<LogoutPage/>} />
+              <Route path="login" element={<LoginPage/>} />
+              <Route path="registration" element={<RegistrationPage/>} />
+              <Route path="update" element={<UpdatePage/>} />
+              <Route path="*" element={<NoPage />} />
+            </Route>
+          </Routes>
+        {/* </AuthContext> */}
+        </AuthContext>
       </div>
     </ThemeProvider>
   );
