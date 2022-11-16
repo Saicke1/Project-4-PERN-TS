@@ -26,6 +26,9 @@ const LoginPage = () => {
         <Link to="/profile">
           <button onClick={handleLogin}>Log In</button>
         </Link>
+        <Link to="/registration">
+          <button>Have no Account yet?</button>
+        </Link>
       </form>
     </div>
   )

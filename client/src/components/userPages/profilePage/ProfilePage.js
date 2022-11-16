@@ -16,7 +16,7 @@ const ProfilePage = () => {
 
   console.log('isLoggedIn', isLoggedIn);
   console.log('user from context on profile page', user);
-
+  
   return <div>
     Profile Page
     <Link to="/update">

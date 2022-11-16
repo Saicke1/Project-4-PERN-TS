@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./Footer.css";
+import { authContext } from "../context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 import ReplyIcon from "@mui/icons-material/Reply";
 import HomeIcon from "@mui/icons-material/Home";
@@ -7,6 +8,7 @@ import LuggageIcon from "@mui/icons-material/Luggage";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import MenuIcon from '@mui/icons-material/Menu';
 import LogoutIcon from '@mui/icons-material/Logout';
+import LoginIcon from '@mui/icons-material/Login';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
@@ -15,6 +17,8 @@ import Divider from '@mui/material/Divider';
 
 const Footer = () => {
 
+  const { isLoggedIn } = useContext(authContext);
+  const navigate = useNavigate();
   const [state, setState] = useState({
     bottom: false
   });
@@ -37,24 +41,23 @@ const Footer = () => {
       <List id="hamburgerBox">
         <div className="profilePosition">
           <h4>Profile</h4>
-          <Link to="/registration" className="icons">
+          {isLoggedIn ? <Link to="/profile" className="icons">
             <AccountBoxIcon fontSize="inherit" />
-          </Link>
+          </Link> : <Link to="/login" className="icons">
+            <AccountBoxIcon fontSize="inherit" />
+          </Link>}
         </div>
       </List>
       <Divider />
       <List id="hamburgerBox">
-      <div className="profilePosition">
-          <h4>Logout</h4>
-          <Link to="/logout" className="icons">
-            <LogoutIcon fontSize="inherit" />
-          </Link>
-        </div>
+          {isLoggedIn ? <div className="profilePosition icons"><h4>Logout</h4><Link to="/logout" className="icons"> 
+            <LogoutIcon fontSize="inherit" /></Link></div>
+            : <div className="profilePosition"><h4>Login</h4> <Link to="/login" className="icons">
+            <LoginIcon fontSize="inherit" />
+          </Link></div>}
       </List>
     </Box>
   );
-
-  const navigate = useNavigate();
 
   return (
     <div className="footerContainer">

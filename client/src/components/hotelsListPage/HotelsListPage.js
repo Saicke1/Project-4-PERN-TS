@@ -24,7 +24,7 @@ const ListPage = () => {
   };
 
   return (
-    <div>
+    <div className="hotelsListContainer">
       ListPage
       <form onSubmit={handleClick}>
         <input

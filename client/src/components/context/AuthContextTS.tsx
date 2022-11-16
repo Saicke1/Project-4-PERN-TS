@@ -14,7 +14,7 @@ const authDefaultValues: authContextTypes = {
     registration: () => {},
 }
 
-const UserContext = createContext<authContextTypes>(authDefaultValues);
+export const UserContext = createContext<authContextTypes>(authDefaultValues);
 
 export function useAuth() {
     return useContext(UserContext);
@@ -49,7 +49,6 @@ const AuthContext = ({ children }: Props) => {
 
     return (
         <div>
-            Context
             <UserContext.Provider value={value}>
                 {children}
             </UserContext.Provider>

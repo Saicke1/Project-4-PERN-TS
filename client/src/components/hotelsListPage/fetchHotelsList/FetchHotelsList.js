@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from "react";
+import "./FetchHotelsList.css";
 import { Link } from "react-router-dom";
 import EditHotel from "../editHotel/EditHotel.js";
-import "./FetchHotelsList.css";
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 
 const FetchHotelsList = () => {
   const [hotels, setHotels] = useState([]);
@@ -40,7 +46,7 @@ const FetchHotelsList = () => {
   }, []);
 
   return (
-    <div>
+    <div className="listContainer">
       List of Hotels
       <table>
         <thead>
@@ -65,7 +71,7 @@ const FetchHotelsList = () => {
                   </button>
                 </td>
                 <td>
-                  <Link to="/details">
+                  <Link to={`/details/${hotel.hotelid}`}>
                     <button>Details</button>
                   </Link>
                 </td>
@@ -74,6 +80,28 @@ const FetchHotelsList = () => {
           })}
         </tbody>
       </table>
+
+      <Card sx={{ maxWidth: 345 }}>
+      <CardMedia
+        component="img"
+        height="140"
+        image="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/23/af/e6/77/exterior-view-top-vch.jpg?w=1100&h=-1&s=1"
+        alt="green iguana"
+      />
+      <CardContent>
+        <Typography gutterBottom variant="h5" component="div">
+          Lizard
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          Lizards are a widespread group of squamate reptiles, with over 6,000
+          species, ranging across all continents except Antarctica
+        </Typography>
+      </CardContent>
+      <CardActions>
+        <Button size="small">Share</Button>
+        <Button size="small">Learn More</Button>
+      </CardActions>
+    </Card>
     </div>
   );
 };

@@ -6,23 +6,17 @@ const AuthContext = (props) => {
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
-  const [change, setChange] = useState(false);
 
-  useEffect(() => {
-  async function getUser() {
-    if(change){
+ 
+ /*  async function getUser() {
       try {
         const response = await fetch(`http://localhost:5000/user/${user.user_id}`);
         const userData = await response.json();
-        console.log('userData', userData);
-        setChange(false);
+        setUser(userData);
       } catch (error) {
-        console.log('UseEffect and update was not successful.', error.message)
+        console.log('Update was not successful.', error.message)
       }
-  }
-  }
-  getUser();
-  }, []);
+  }; */
 
 
   const registration = () => {
@@ -64,6 +58,8 @@ const AuthContext = (props) => {
       } catch (error) {
         console.log(error.message);
       } 
+      /* getUser(); */
+      setUser({ ...user, nickname: nickname });
     }
 
   return (
