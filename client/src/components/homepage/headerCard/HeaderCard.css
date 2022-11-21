@@ -1,0 +1,17 @@
+.css-1qaznj3-MuiCardContent-root:last-child{ /* text card styling */
+    padding-bottom: 10px;
+    background-color: #b71e3f;
+    color: white;
+}
+
+.css-1qaznj3-MuiCardContent-root{ /* text card styling */
+    padding: 10px;
+}
+
+.css-ecpxie-MuiTypography-root{ /* text color of the welcome text */
+    color: white;
+}
+
+#divider{
+    border-color: white;
+}

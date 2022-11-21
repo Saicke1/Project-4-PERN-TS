@@ -5,7 +5,7 @@ import cloud from "../../images/cloud.png";
 
 const TopBanner = () => {
   return (
-    <div className="title">
+    <div className="topBannerContainer">
       <img src={cloud} alt="cloud" className="imageCLoud" />
       <Typography variant="h5" gutterBottom>
         Happy Hotels Heaven

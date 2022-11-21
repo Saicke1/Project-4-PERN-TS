@@ -19,7 +19,7 @@ const RegistrationPage = () => {
     try {
       console.log('email', email);
       console.log('password', password);
-      registration();
+      registration(email, password);
       navigate("/profile");
     } catch (error) {
       console.log(error.message);

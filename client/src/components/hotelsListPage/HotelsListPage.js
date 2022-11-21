@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import FetchHotelsList from "./fetchHotelsList/FetchHotelsList";
 import "./HotelsListPage.css";
+import Typography from "@material-ui/core/Typography";
 
 const ListPage = () => {
   const [hotelname, setHotelName] = useState("");
@@ -25,15 +26,9 @@ const ListPage = () => {
 
   return (
     <div className="hotelsListContainer">
-      ListPage
-      <form onSubmit={handleClick}>
-        <input
-          type="text"
-          value={hotelname}
-          onChange={(e) => setHotelName(e.target.value)}
-        />
-        <button>Click me</button>
-      </form>
+      <Typography variant="h3" gutterBottom className="colorTitle">
+        Our Happy Hotels
+      </Typography>
       <FetchHotelsList />
     </div>
   );

@@ -7,14 +7,23 @@ const LoginPage = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { login } = useContext(authContext);
+  const { user, login, loginToken } = useContext(authContext);
 
   function handleSubmit(e){
     e.preventDefault();
   }
 
-  const handleLogin = () => {
-    login(email, password);
+  const handleLogin = async () => {
+    /* login(email, password); */
+    const { success, error } = await loginToken(email, password)
+        if (success) {
+            /* navigate("/"); */
+          console.log('user auf login page', user);
+        }
+        else {
+            /* error && setValues({ ...values, error: error }) */
+            console.log("An error occured while login.")
+        }
   }
 
   return (

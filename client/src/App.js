@@ -31,7 +31,7 @@ function App() {
               <Route index element={<Homepage />} />
               <Route path="listHotels" element={<ListPage />} />
               <Route path="profile" element={<ProfilePage />} />
-              <Route path="details/:id" element={<DetailsPage />} />
+              <Route path="details/:userId" element={<DetailsPage />} />
               <Route path="logout" element={<LogoutPage/>} />
               <Route path="login" element={<LoginPage/>} />
               <Route path="registration" element={<RegistrationPage/>} />

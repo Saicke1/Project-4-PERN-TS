@@ -1,5 +1,7 @@
 import React, { createContext, useState, useEffect } from 'react';
 
+const url = "http://localhost:5000";
+
 export const authContext = createContext();
 
 const AuthContext = (props) => {
@@ -19,8 +21,19 @@ const AuthContext = (props) => {
   }; */
 
 
-  const registration = () => {
+  const registration = async (email, password) => {
+    const fetchSettings = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password })
+    }
+    const res = await fetch(`${url}/user/all/signup`, fetchSettings);
+    /* in res.json() wird durch backend wird bestimmt, dass ich success, email und jwt bekomme*/
+    const { success, error, jwt } = await res.json();
+    localStorage.setItem("jwt", jwt);
+    /* setUser({ email }); */
     setIsLoggedIn(true);
+    return { success, error }
   };
 
     const login = async (email, password) => {
@@ -41,6 +54,22 @@ const AuthContext = (props) => {
         console.log(error.message);
       } 
     };
+
+    const loginToken = async (email, password) => {
+    const fetchSettings = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ email, password })
+    }
+    const res = await fetch(`${url}/user/all/login`, fetchSettings);
+    const { success, token, error, loggedUser } = await res.json();
+    localStorage.setItem("jwt", token);
+    setIsLoggedIn(true);
+    setUser(loggedUser);
+    return { success, error }
+    }
 
     const logout = () => {
       setUser(null);
@@ -64,7 +93,7 @@ const AuthContext = (props) => {
 
   return (
     <div>
-      <authContext.Provider value={{ user, isLoggedIn, registration, login, logout, update }}>
+      <authContext.Provider value={{ user, isLoggedIn, registration, login, loginToken, logout, update }}>
         {props.children}
       </authContext.Provider>
     </div>

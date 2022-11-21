@@ -1,3 +1,32 @@
-.listContainer{
-    background-color: red;
+.cardAction{ 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+}
+
+.CardPosition{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.css-1ri6ub7-MuiPaper-root-MuiCard-root{ /* die breite einer jeden Card */
+width: 340px;
+}
+
+.css-r40f8v-MuiTypography-root{ /* middle text styling */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#starIcon{
+    color: #e6cc00;
+}
+
+.linkStyle{
+    text-decoration: none;
 }
