@@ -12,6 +12,7 @@ import LoginPage from "./components/userPages/loginPage/LoginPage";
 import RegistrationPage from "./components/userPages/registrationPage/RegistrationPage";
 import AuthContext from "./components/context/AuthContext";
 import UpdatePage from "./components/userPages/updatePage/UpdatePage";
+import CommentContext from "./components/context/CommentContext";
 /* import AuthContextTS from "./components/context/AuthContextTS.tsx"; */
 
 const theme = createTheme({
@@ -25,13 +26,14 @@ function App() {
     <ThemeProvider theme={theme}>
       <div className="AppContainer">
         <AuthContext>
+          <CommentContext>
         {/* <AuthContextTS> */}
           <Routes>
             <Route path="/" element={<Layout />}>
               <Route index element={<Homepage />} />
               <Route path="listHotels" element={<ListPage />} />
               <Route path="profile" element={<ProfilePage />} />
-              <Route path="details/:userId" element={<DetailsPage />} />
+              <Route path="details/:hotel_id" element={<DetailsPage />} />
               <Route path="logout" element={<LogoutPage/>} />
               <Route path="login" element={<LoginPage/>} />
               <Route path="registration" element={<RegistrationPage/>} />
@@ -40,6 +42,7 @@ function App() {
             </Route>
           </Routes>
         {/* </AuthContextTS> */}
+        </CommentContext>
         </AuthContext>
       </div>
     </ThemeProvider>

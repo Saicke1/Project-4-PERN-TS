@@ -2,6 +2,7 @@
 import express from "express";
 import userRoutes from "./routes/userRoutes.js";
 import hotelRoutes from "./routes/hotelRoutes.js";
+import commentRoutes from "./routes/commentRoutes.js";
 import cors from "cors";
 import pool from "./dbConfig.js";
 console.log("Console log nodemon is working.");
@@ -35,6 +36,7 @@ app.get("/", (req, res) => {
 
 app.use("/user", userRoutes);
 app.use("/hotel", hotelRoutes);
+app.use("/comment", commentRoutes);
 
 //define the port of our server
 app.listen(5000, () => {

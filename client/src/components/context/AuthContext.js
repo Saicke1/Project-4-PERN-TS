@@ -74,6 +74,7 @@ const AuthContext = (props) => {
     const logout = () => {
       setUser(null);
       setIsLoggedIn(false);
+      localStorage.clear();
     };
 
     const update = async (nickname) => {

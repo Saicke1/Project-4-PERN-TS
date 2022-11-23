@@ -32,9 +32,9 @@ const ExpandMore = styled((props) => {
 const DetailsPage = () => {
   const [expanded, setExpanded] = React.useState(false);
   const [hotel, setHotel] = useState([]);
-  const { userId } = useParams();
+  const { hotel_id } = useParams();
   const url = "http://localhost:5000";
-  console.log('userId', userId);
+  console.log('hotelId', hotel_id);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -43,7 +43,7 @@ const DetailsPage = () => {
 //get one Hotels
 const getOneHotel = async () => {
   try {
-    const response = await fetch(`${url}/hotel/${userId}`);
+    const response = await fetch(`${url}/hotel/${hotel_id}`);
     const jsonData = await response.json();
     console.log('jsonData', jsonData);
     setHotel(jsonData);
@@ -54,7 +54,7 @@ const getOneHotel = async () => {
 
 useEffect(() => {
   getOneHotel();
-}, [userId]);
+}, [hotel_id]);
   
 console.log('hotel', hotel);
 
