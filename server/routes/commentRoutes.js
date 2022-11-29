@@ -47,10 +47,10 @@ router.get("/:commentid", async (req, res) => {
 router.post("/create", async (req, res) => {
     try {
       //console.log(req.body);
-      const { comment_text, rating, user_id, hotel_id } = req.body;
+      const { comment_text, rating, user_id, hotel_id, comment_title } = req.body;
       const newComment = await pool.query(
-        "INSERT INTO comments (comment_text, rating, user_id, hotel_id) VALUES($1, $2, $3, $4) RETURNING *",
-        [comment_text, rating, user_id, hotel_id]
+        "INSERT INTO comments (comment_text, rating, user_id, hotel_id, comment_title) VALUES($1, $2, $3, $4, $5) RETURNING *",
+        [comment_text, rating, user_id, hotel_id, comment_title]
       );
       res.json(newComment.rows[0]);
     } catch (error) {

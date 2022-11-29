@@ -9,7 +9,7 @@ const CommentContext = (props) => {
     const [stars, setStars] = useState(0);
     const user_id = 1;
 
-    const createComment = async (comment, hotel_id) => {
+    const createComment = async (comment, commentTitle, hotel_id) => {
        /* Get every data
         console.log('stars in CommentContext', stars);
         console.log('comment in CommentContext', comment);
@@ -18,7 +18,8 @@ const CommentContext = (props) => {
 
         const rating = stars;
         const comment_text = comment;
-        const body = {comment_text, rating, user_id, hotel_id};
+        const comment_title = commentTitle;
+        const body = {comment_text, rating, user_id, hotel_id, comment_title};
 
         const fetchSettings = {
             method: "POST",

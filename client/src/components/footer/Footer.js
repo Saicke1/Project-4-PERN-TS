@@ -61,6 +61,7 @@ const Footer = () => {
 
   return (
     <div className="footerContainer">
+      { console.log("Is there an infinite loop?") }
       <div className="icons">
         <ReplyIcon onClick={() => navigate(-1)} fontSize="inherit" />
       </div>

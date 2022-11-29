@@ -1,6 +1,6 @@
 import * as dotenv from "dotenv";
 import * as pg from "pg";
-import Sequelize from "sequelize";
+/* import Sequelize from "sequelize"; */
 
 dotenv.config({ path: "./.env.local" });
 

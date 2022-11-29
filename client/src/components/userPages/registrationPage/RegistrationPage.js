@@ -11,6 +11,7 @@ const RegistrationPage = () => {
   const { registration } = useContext(authContext);
 
   const navigate = useNavigate();
+  const [nickname, setNickname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -19,7 +20,7 @@ const RegistrationPage = () => {
     try {
       console.log('email', email);
       console.log('password', password);
-      registration(email, password);
+      registration(nickname, email, password);
       navigate("/profile");
     } catch (error) {
       console.log(error.message);
@@ -30,6 +31,7 @@ const RegistrationPage = () => {
     <div>
       Registration Page
       <form>
+        <input type="text" value={nickname} placeholder="User Name" onChange={(e) => setNickname(e.target.value)}/>
         <input type="text" value={email} placeholder="email" onChange={(e) => setEmail(e.target.value)}/>
         <input type="text" value={password} placeholder="password" onChange={(e) => setPassword(e.target.value)}/>
         <button onClick={handleRegistration} type="submit">create Account</button>

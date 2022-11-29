@@ -143,6 +143,10 @@ router.post("/all/signup", async (req, res) => {
 
 // ---------------------------------------------------------------------------------------------------------------------
 
+/* router.get("/me", auth, async (req, res) => {
+console.log('req.user', req.user)
+}) */
+
 router.post("/all/login", async (req, res) => {
   const { email, password } = req.body;
   try {
@@ -165,14 +169,21 @@ router.post("/all/login", async (req, res) => {
           const token = jwt.sign(
             {
               email: email,
+              /* id: user[0].user_id,
+              Alles was hier drin steht, kann dann auf jwt.io gedebuggt werden und ist für jeden ersichtlich.
+              Mit nur der mail hier sieht man nur die email im debug und den iat key.
+              iat steht für "issue at" und ist das datum, wann der token erstellt wurde.
+              */
             },
             process.env.SECRET_KEY
           );
           res.status(200).json({
             success: true,
-/*             useremail: user[0].email,
-            nickname: user[0].nickname,
-            userpicture: user[0].picture, */
+            useremail: user[0].email,
+            usernickname: user[0].nickname,
+            userpicture: user[0].picture,
+            usertext: user[0].profiletext,
+            userid: user[0].user_id,
             loggedUser: user[0],
             token: token, //const token is declared here in code before
           });

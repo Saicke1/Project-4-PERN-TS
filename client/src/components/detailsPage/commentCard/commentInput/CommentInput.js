@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import "./CommentInput.css";
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import Box from '@mui/material/Box';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -13,10 +14,10 @@ import { useParams } from "react-router-dom";
 
 const CommentInput = () => {
     const [open, setOpen] = React.useState(false);
+    const [commentTitle, setCommentTitle] = useState("");
     const [comment, setComment] = useState("");
     const { createComment, setStars } = useContext(userCommentsContext);
     const { hotel_id } = useParams();
-    console.log('id an commentinput von params', hotel_id);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -28,7 +29,7 @@ const CommentInput = () => {
   };
 
   const handleSend = () => {
-    createComment(comment, hotel_id);
+    createComment(comment, commentTitle, hotel_id);
     setOpen(false);
   };
 
@@ -43,18 +44,36 @@ const CommentInput = () => {
         <DialogTitle>Comment</DialogTitle>
         <DialogContent>
           <DialogContentText>
+            Please set a title:
+          </DialogContentText>
+          <Box
+            component="form"
+            sx={{
+              '& .MuiTextField-root': { m: 1, width: '25ch' },
+            }}
+            noValidate
+            autoComplete="off"
+          >
+            <div>
+            <TextField
+              id="outlined-textarea"
+              label="max. 25 characters"
+              placeholder="Comment title"
+              multiline
+              onChange={(e) => setCommentTitle(e.target.value)}
+              />
+              <DialogContentText>
             Please be respectful and friendly:
           </DialogContentText>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="max. 300 characters"
-            type="text"
-            fullWidth
-            variant="standard"
-            onChange={(e) => setComment(e.target.value)}
-          />
+              <TextField
+              id="outlined-textarea"
+              label="max. 300 characters"
+              placeholder="Your comment"
+              multiline
+              onChange={(e) => setComment(e.target.value)}
+              />
+            </div>
+          </Box>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>

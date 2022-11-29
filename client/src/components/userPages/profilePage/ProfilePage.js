@@ -1,8 +1,9 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import "./ProfilePage.css";
 import { Link } from "react-router-dom";
-/* import { useAuth } from "../../context/AuthContext.tsx"; */
 import { authContext } from "../../context/AuthContext";
+import dummyPic from "../../../images/dummyImage.jpeg";
+/* import { useAuth } from "../../context/AuthContext.tsx"; */
 
 const ProfilePage = () => {
 
@@ -25,7 +26,11 @@ const ProfilePage = () => {
     <Link to="/logout">
       <button onClick={() => logout()}>Logout</button>
     </Link>
-    {user && <div><p>There is a user {user.email}</p> <p>This is your nickname {user.nickname}</p></div>}
+    {user && <div><p>There is a user {user.email}</p> <p>This is your nickname {user.nickname}</p>
+    {user.picture ?
+    <img alt="profilepic" src={user.picture} style={{ width: "150px", height: "150px" }}/> :
+    <img alt="dummypic" src={dummyPic} style={{ width: "150px", height: "150px", borderRadius: "5px" }}/>}
+    </div>}
   </div>;
 };
 

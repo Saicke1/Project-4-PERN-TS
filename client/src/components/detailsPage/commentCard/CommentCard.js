@@ -33,45 +33,21 @@ const CommentCard = () => {
     getComments();
   }, []);
 
-const getDate = comments[0].comment_date
-
   return (
     <div>
       <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
         <h2>Comments and Ratings</h2>
       <Divider variant="inset" component="li" />
-      <ListItem alignItems="flex-start">
-        <ListItemAvatar>
-          <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-        </ListItemAvatar>
-        <ListItemText
-          primary="Brunch this weekend?"
-          secondary={
-            <React.Fragment>
-              <Typography
-                sx={{ display: 'inline' }}
-                component="span"
-                variant="body2"
-                color="text.primary"
-              >
-                Ali Connors
-              </Typography>
-              {" — I'll be in your neighborhood doing errands this…"}
-            </React.Fragment>
-          }
-        />
-      </ListItem>
-      <Divider variant="inset" component="li" />
 
-      {comments && comments.map(each => {
+      {comments && comments.map((each, index) => {
         return (
-          <div>
-            <ListItem alignItems="flex-start">
+          <div id={index}>
+            <ListItem alignItems="flex-start" id={index}>
               <ListItemAvatar>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
               </ListItemAvatar>
               <ListItemText
-              primary="Brunch this weekend?"
+              primary={each.comment_title}
               secondary={
                 <React.Fragment>
                   <Typography
@@ -82,7 +58,7 @@ const getDate = comments[0].comment_date
                   >
                     Username:{each.user_id}
                   </Typography>
-                  {" — "}{each.comment_text}{each.comment_date}
+                  {" — "}{each.comment_text} <br></br> {each.comment_date}
                 </React.Fragment>
               }
               />
