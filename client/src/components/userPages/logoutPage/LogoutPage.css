@@ -1,0 +1,19 @@
+.logoutOverwrap{
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 75vh;
+}
+
+.logoutContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 95%;
+    background-color: #b71e3f;
+    border-radius: 10px;
+    gap: 10px;
+}

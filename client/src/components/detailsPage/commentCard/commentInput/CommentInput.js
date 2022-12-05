@@ -18,6 +18,7 @@ const CommentInput = () => {
     const [comment, setComment] = useState("");
     const { createComment, setStars } = useContext(userCommentsContext);
     const { hotel_id } = useParams();
+    const newHotelId = +hotel_id;
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -29,7 +30,7 @@ const CommentInput = () => {
   };
 
   const handleSend = () => {
-    createComment(comment, commentTitle, hotel_id);
+    createComment(comment, commentTitle, newHotelId);
     setOpen(false);
   };
 

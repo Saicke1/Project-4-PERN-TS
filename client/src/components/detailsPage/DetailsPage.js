@@ -14,7 +14,7 @@ import Typography from '@mui/material/Typography';
 import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import FavIcon from "../hotelsListPage/favoriteIcon/FavIcon";
+import FavIcon from "../favoriteIcon/FavIcon";
 import ListHotelDetails from "./listHotelDetails/ListHotelDetails";
 import CommentCard from "./commentCard/CommentCard";
 
@@ -34,29 +34,29 @@ const DetailsPage = () => {
   const [hotel, setHotel] = useState([]);
   const { hotel_id } = useParams();
   const url = "http://localhost:5000";
-  console.log('hotelId', hotel_id);
+  /* console.log('hotelId', hotel_id); */
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
+useEffect(() => {
 //get one Hotels
 const getOneHotel = async () => {
   try {
     const response = await fetch(`${url}/hotel/${hotel_id}`);
     const jsonData = await response.json();
-    console.log('jsonData', jsonData);
+    /* console.log('jsonData', jsonData); */
     setHotel(jsonData);
   } catch (error) {
     console.log(error.message);
   }
 };
 
-useEffect(() => {
   getOneHotel();
 }, [hotel_id]);
   
-console.log('hotel', hotel);
+/* console.log('hotel', hotel); */
 
   return (
     <div className="detailsContainer">

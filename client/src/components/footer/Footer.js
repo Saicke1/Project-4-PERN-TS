@@ -13,11 +13,12 @@ import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
+import FavoriteIcon from '@mui/icons-material/Favorite';
   
 
 const Footer = () => {
 
-  const { isLoggedIn } = useContext(authContext);
+  const { isLoggedIn, logout } = useContext(authContext);
   const navigate = useNavigate();
   const [state, setState] = useState({
     bottom: false
@@ -41,20 +42,35 @@ const Footer = () => {
       <List id="hamburgerBox">
         <div className="profilePosition">
           <h4>Profile</h4>
-          {isLoggedIn ? <Link to="/profile" className="icons">
+          {isLoggedIn ?
+          <Link to="/profile" className="icons">
             <AccountBoxIcon fontSize="inherit" />
-          </Link> : <Link to="/login" className="icons">
+          </Link> :
+          <Link to="/login" className="icons">
             <AccountBoxIcon fontSize="inherit" />
           </Link>}
         </div>
+          {isLoggedIn ?
+          <div className="profilePosition"><h4>Favorites</h4>
+          <Link to="/favorites" className="icons">
+            <FavoriteIcon fontSize="inherit" />
+          </Link></div> : <></>}
       </List>
       <Divider />
       <List id="hamburgerBox">
-          {isLoggedIn ? <div className="profilePosition icons"><h4>Logout</h4><Link to="/logout" className="icons"> 
-            <LogoutIcon fontSize="inherit" /></Link></div>
-            : <div className="profilePosition"><h4>Login</h4> <Link to="/login" className="icons">
-            <LoginIcon fontSize="inherit" />
-          </Link></div>}
+          {isLoggedIn ?
+          <div className="profilePosition">
+            <h4>Logout</h4>
+            <Link to="/logout" className="icons" onClick={() => logout()}> 
+              <LogoutIcon fontSize="inherit" />
+            </Link>
+          </div> :
+          <div className="profilePosition">
+            <h4>Login</h4>
+            <Link to="/login" className="icons">
+              <LoginIcon fontSize="inherit" />
+            </Link>
+          </div>}
       </List>
     </Box>
   );

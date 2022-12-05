@@ -3,10 +3,12 @@ import client from "../dbConfig.js";
 
 //GET ALL COMMENTS
 export const getAllComments = async (req, res) => {
+  const { id } = req.params;
     try {
-      const users = await client.query(`SELECT email , nickname , picture , comment_id, comment_text, comment_title, rating
+      const users = await client.query(`SELECT users.user_id, email , nickname , picture , comment_id, comment_text, comment_title, rating, comment_date
       FROM comments , users
-      WHERE comments.user_id = users.user_id`);
+      WHERE comments.hotel_id = $1 AND users.user_id = comments.user_id
+      ORDER BY comments.comment_date`, [id]);
       res.status(200).json(
         users.rows,
       );
@@ -16,7 +18,7 @@ export const getAllComments = async (req, res) => {
         msg: "server failed",
       });
     }
-  }
+  };
 
   //CREATE A COMMENT
   export const createComment = async (req, res) => {
@@ -37,9 +39,9 @@ export const getAllComments = async (req, res) => {
       const userid = req.user.user_id;
     /* console.log('user', userid); */
     const { comment_text, rating, comment_title, hotel_id } = req.body
-    const newComment = await client.query(`INSERT INTO comments (comment_text, rating, comment_title, user_id, hotel_id)
+    const newComment = await client.query(`INSERT INTO comments (comment_text, rating, comment_title, hotel_id, user_id)
                                           VALUES ($1,$2,$3,$4,$5) RETURNING *`,
-                                          [comment_text, rating, comment_title, userid, hotel_id]
+                                          [comment_text, rating, comment_title, hotel_id, userid]
         /* , (err) => {
         if (err) {
           console.error(err);
@@ -70,6 +72,7 @@ export const getAllComments = async (req, res) => {
         comments.hotel_id FROM users
         JOIN comments ON users.user_id = comments.user_id
         WHERE email = $1;`, [req.payload.email]);
+        console.log('userComments', userComments);
         res.json(userComments.rows);
       } catch (error) {
         console.log('error.message', error.message);
@@ -94,14 +97,13 @@ export const getAllComments = async (req, res) => {
         /* Beispiel was im req.payload zu sehen ist, wenn du authMiddleware nutzt:
         { email: 'katia@mail.de', userid: 11, iat: 1669622315 } */
 
-        const { comment_id, comment_text, comment_title, rating, hotel_id } = req.body;
+        const { comment_id, comment_text, comment_title, rating } = req.body;
 
        const updateComment = await client.query(`UPDATE comments
                                                  SET comment_text = $1, comment_title = $2, rating = $3
-                                                 WHERE user_id = $4
-                                                 AND hotel_id = $5
-                                                 AND comment_id = $6 RETURNING *`,
-                                                 [comment_text, comment_title, rating, req.user.user_id, hotel_id, comment_id]);
+                                                 WHERE comment_id = $4
+                                                 AND user_id = $5 RETURNING *`,
+                                                 [comment_text, comment_title, rating, comment_id, req.user.user_id]);
           if(updateComment.rows.length === 0){
             return res.json("This comment is not your comment.");
           }

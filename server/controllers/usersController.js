@@ -204,6 +204,19 @@ export const getProfile = async (req, res) => {
   }
 };
 
-/* router.get("/me", auth, async (req, res) => {
-console.log('req.user', req.user)
-}) */
+//UPDATE A USER PROFILE
+export const updateUser = async (req, res) => {
+  try {
+    const { nickname, picture, profiletext } = req.body;
+    const updateUser = await client.query(`UPDATE users
+                                          SET nickname = $1, picture = $2, profiletext = $3
+                                          WHERE user_id = $4 RETURNING *`, [nickname, picture, profiletext, req.user.user_id]);
+    if(updateUser.rows.length === 0){
+      return res.json("This user isn't your profile or the update wasn't successful.");
+    }
+    res.json("Your profile was updatet.");
+  } catch (error) {
+    console.log('error.message', error.message);
+    res.status(500).send("Server Error. The profile wasn't updatet.");
+  }
+}

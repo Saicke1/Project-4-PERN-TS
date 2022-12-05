@@ -1,0 +1,9 @@
+#deleteButton{
+    padding: 3px;
+    color: #b71e3f;
+    display: flex;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    padding: 5px;
+}

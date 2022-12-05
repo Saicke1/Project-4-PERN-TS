@@ -5,7 +5,6 @@ import Rating from '@mui/material/Rating';
 import { userCommentsContext } from '../../../context/CommentContext';
 
 const RatingStars = () => {
-    /* const [stars, setStars] = React.useState(0); */
   const { stars, setStars } = useContext(userCommentsContext);
 
   return (

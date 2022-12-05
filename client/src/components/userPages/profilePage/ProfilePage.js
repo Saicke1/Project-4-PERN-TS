@@ -1,37 +1,51 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext } from "react";
 import "./ProfilePage.css";
 import { Link } from "react-router-dom";
 import { authContext } from "../../context/AuthContext";
 import dummyPic from "../../../images/dummyImage.jpeg";
+import Typography from "@material-ui/core/Typography";
+import Box from '@mui/material/Box';
+import Fab from '@mui/material/Fab';
+import IconButton from '@mui/material/IconButton';
+import EditIcon from '@mui/icons-material/Edit';
 /* import { useAuth } from "../../context/AuthContext.tsx"; */
 
 const ProfilePage = () => {
-
-  /* const { user } = useContext(useAuth);
-
-  if(user) {
-    console.log('user', user);
-  } */
-
-  const { user, isLoggedIn, logout } = useContext(authContext);
-
-  console.log('isLoggedIn', isLoggedIn);
-  console.log('user from context on profile page', user);
+  const { user, isLoggedIn } = useContext(authContext);
   
-  return <div>
-    Profile Page
-    <Link to="/update">
-    <button>Update</button>
-    </Link>
-    <Link to="/logout">
-      <button onClick={() => logout()}>Logout</button>
-    </Link>
-    {user && <div><p>There is a user {user.email}</p> <p>This is your nickname {user.nickname}</p>
-    {user.picture ?
-    <img alt="profilepic" src={user.picture} style={{ width: "150px", height: "150px" }}/> :
-    <img alt="dummypic" src={dummyPic} style={{ width: "150px", height: "150px", borderRadius: "5px" }}/>}
-    </div>}
-  </div>;
+  return (
+    <div className='profileOverwrap'>
+      <div className="profileContainer">
+        <Typography variant="h4" gutterBottom style={{ marginTop: "10px" }}>
+        Welcome Back
+        </Typography>
+
+        {user && <div>
+          <Link to="/update">
+              <IconButton aria-label="update" id="iconButtonposition">
+                <EditIcon fontSize="inherit" id='profilePicUpdateButton'/>
+              </IconButton>
+            </Link>
+          <Box sx={{ '& > :not(style)': { m: 1 } }}>
+            <Fab variant="extended" id="nicknameBadge">
+              {user.nickname}
+            </Fab>
+          </Box>
+          {user.picture ?
+          <div className="imageContainer">
+            <img alt="profilepic" src={user.picture} className="profilePic"/>
+          </div> :
+          <div className="imageContainer">
+            <img alt="dummypic" src={dummyPic} className="profilePic"/>
+            </div>}
+        </div>}
+            <div className="profileText">
+              {user.profiletext ?
+              <p>{user.profiletext}</p>
+            : <p>Here could stand your welcome text.</p>}
+            </div>
+      </div>
+    </div>);
 };
 
 export default ProfilePage;

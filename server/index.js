@@ -10,6 +10,7 @@ import { passportConfig } from "./middleware/passport.js";
 import userRoutes from "./routes/userRoutes.js";
 import hotelRoutes from "./routes/hotelRoutes.js";
 import commentRoutes from "./routes/commentRoutes.js";
+import favoriteRoutes from "./routes/favoriteRoutes.js";
 
 //new Routes with controllers
 import usersRoutes from "./routes/usersRoutes.js";
@@ -59,5 +60,6 @@ app.use("/comment", commentRoutes);
 //Routes with Controllers
 app.use("/users", usersRoutes);
 app.use("/comments", commentsRoutes);
+app.use("/favorites", favoriteRoutes);
 
 export default app;

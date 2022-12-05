@@ -3,6 +3,10 @@ import "./RegistrationPage.css";
 import { Link, useNavigate } from "react-router-dom";
 /* import { useAuth } from '../../context/AuthContext.tsx'; */
 import { authContext } from '../../context/AuthContext';
+import Typography from "@material-ui/core/Typography";
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Box from '@mui/material/Box';
 
 const RegistrationPage = () => {
 
@@ -28,17 +32,49 @@ const RegistrationPage = () => {
   };
 
   return (
-    <div>
-      Registration Page
-      <form>
-        <input type="text" value={nickname} placeholder="User Name" onChange={(e) => setNickname(e.target.value)}/>
-        <input type="text" value={email} placeholder="email" onChange={(e) => setEmail(e.target.value)}/>
-        <input type="text" value={password} placeholder="password" onChange={(e) => setPassword(e.target.value)}/>
-        <button onClick={handleRegistration} type="submit">create Account</button>
-      </form>
-      <Link to="/login">
-      <button>Have already an Account</button>
-      </Link>
+    <div className='registerOverwrap'>
+      <div className='registerContainer'>
+      <Typography variant="h4" gutterBottom style={{ marginTop: "10px" }}>
+        Please Sign Up
+        </Typography>
+
+        <form className="formRegisterStyle">
+        <Box sx={{ '& > :not(style)': { m: 1, width: '25ch' }, }}
+            noValidate
+            autoComplete="off"
+          >
+            <TextField
+            id="filled-basic"
+            label="username"
+            placeholder=""
+            multiline
+            value={nickname}
+            onChange={(e) => setNickname(e.target.value)}
+          />
+          <TextField
+            id="filled-basic"
+            label="email"
+            placeholder=""
+            multiline
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <TextField
+            id="filled-basic"
+            label="password"
+            placeholder=""
+            multiline
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </Box>
+          <Button variant="contained" onClick={handleRegistration} id="registerBtn">create Account</Button>
+        </form>
+        
+        <Link to="/login" style={{ textDecoration: "none", marginBottom: "10px" }}>
+        Have already an Account?
+        </Link>
+      </div>
     </div>
   )
 }

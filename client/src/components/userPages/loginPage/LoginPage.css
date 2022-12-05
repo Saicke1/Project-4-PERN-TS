@@ -1,0 +1,30 @@
+.containerOverwrap{
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 75vh;
+}
+
+.loginContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 95%;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.formStyle{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+#loginBtn{
+    background-color: #b71e3f;
+    margin-bottom: 10px;
+}

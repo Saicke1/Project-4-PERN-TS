@@ -2,12 +2,16 @@ import React, { useContext, useState } from 'react';
 import "./LoginPage.css";
 import { Link } from "react-router-dom";
 import { authContext } from '../../context/AuthContext';
+import TextField from '@mui/material/TextField';
+import Box from '@mui/material/Box';
+import Typography from "@material-ui/core/Typography";
+import Button from '@mui/material/Button';
 
 const LoginPage = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { newlogin, loginToken } = useContext(authContext);
+  const { newlogin } = useContext(authContext);
 
   function handleSubmit(e){
     e.preventDefault();
@@ -19,34 +23,51 @@ const LoginPage = () => {
     if (success) {
       console.log("User is logged in successfully.");
     }
-    else {
+    else if(error){
       console.log("An error occured while login.")
     }
-
-   /*  const { success, error } = await loginToken(email, password)
-        if (success) {
-            navigate("/");
-          console.log("User is logged in successfully.");
-        }
-        else {
-            error && setValues({ ...values, error: error })
-            console.log("An error occured while login.")
-        } */
   }
 
   return (
-    <div>
-      Login Page
-      <form onSubmit={handleSubmit}>
-        <input type="text" value={email} placeholder="email" onChange={(e) => setEmail(e.target.value)}/>
-        <input type="text" value={password} placeholder="password" onChange={(e) => setPassword(e.target.value)}/>
-        <Link to="/profile">
-          <button onClick={handleLogin}>Log In</button>
-        </Link>
-        <Link to="/registration">
-          <button>Have no Account yet?</button>
-        </Link>
-      </form>
+    <div className='containerOverwrap'>
+      <div className='loginContainer'>
+        <Typography variant="h4" gutterBottom style={{ marginTop: "10px" }}>
+        Good to see you again
+        </Typography>
+        <form onSubmit={handleSubmit} className="formStyle">
+          <Box sx={{ '& > :not(style)': { m: 1, width: '25ch' }, }}
+            noValidate
+            autoComplete="off"
+          >
+          <TextField
+            id="filled-basic"
+            label="email"
+            placeholder=""
+            multiline
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <TextField
+            id="filled-basic"
+            label="password"
+            placeholder=""
+            multiline
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          </Box>
+
+          <Link to="/profile" style={{ textDecoration: "none" }}>
+            <Button variant="contained" onClick={handleLogin} id="loginBtn">
+              Sign In
+            </Button>
+          </Link>
+
+          <Link to="/registration" style={{ textDecoration: "none", marginBottom: "10px" }}>
+            Have no Account yet? Please Sign Up.
+          </Link> 
+        </form>
+      </div>
     </div>
   )
 }

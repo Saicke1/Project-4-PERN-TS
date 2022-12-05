@@ -9,7 +9,9 @@ const AuthContext = (props) => {
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
+  const StorageItem = localStorage.getItem("token");
 
+  //GET THE WHOLE PROFILE
   async function getName() {
     const fetchSettings = {
       method: "GET",
@@ -20,12 +22,6 @@ const AuthContext = (props) => {
       const data = await response.json();
       /* console.log('data', data); */
       setUser(data);
-      if(data.length !== 0){
-        return true
-      } else {
-        console.log("Wasn't able to catch name.")
-        return false
-      }
     } catch (error) {
       console.log('error.message', error.message);
       console.log("Server error, name couldn't be fetched.");
@@ -33,11 +29,18 @@ const AuthContext = (props) => {
   }
 
   useEffect(() => {
-    const checkprofile = getName();
-    if(checkprofile){
-      setIsLoggedIn(true);
-    } else {setIsLoggedIn(false);}
+    getName();
   }, []);
+
+  useEffect(() => {
+    if(user !== null){
+      setIsLoggedIn(true);
+      console.log("UseEffect have set the loggin to true.")
+    } else {
+      setIsLoggedIn(false);
+      console.log("UseEffect have set the loggin to false.")}
+  }, [user]);
+  
 
   useEffect(() => {
     if(localStorage.getItem("token")){
@@ -48,7 +51,7 @@ const AuthContext = (props) => {
     } else{
       console.log("The localstorage was erased.");
     }
-  }, [localStorage.getItem("token")])
+  }, [StorageItem])
   
   
 
@@ -64,10 +67,8 @@ const AuthContext = (props) => {
     const { success, error, jwt } = await res.json();
     localStorage.setItem("token", jwt);
     /* setUser({ email }); */
-    const checkprofile = await getName();
-    if(checkprofile){
-      setIsLoggedIn(true);
-    } else {setIsLoggedIn(false);}
+    getName();
+    setIsLoggedIn(true);
     return { success, error }
   };
 
@@ -81,33 +82,10 @@ const AuthContext = (props) => {
     const res = await fetch(`${url}/users/login`, fetchSettings);
     const { success, error, token } = await res.json();
     localStorage.setItem("token", token);
-    const checkprofile = await getName();
-    if(checkprofile){
-      setIsLoggedIn(true);
-    } else {setIsLoggedIn(false);}
+    getName();
+    setIsLoggedIn(true);
     return { success, error }
   };
-
-    /* const loginToken = async (email, password) => {
-    const fetchSettings = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ email, password })
-    }
-    let userData = [];
-    const res = await fetch(`${url}/user/all/login`, fetchSettings);
-    const { success, token, error, useremail, usernickname, userpicture, usertext, userid, loggedUser } = await res.json();
-    localStorage.setItem("jwt", token);
-    let createObjectStorage = { useremail, usernickname, userpicture, usertext, userid }
-    userData.push(createObjectStorage);
-    localStorage.setItem("userData", JSON.stringify(userData));
-    setIsLoggedIn(true);
-    setUser(loggedUser);
-    return { success, error }
-    }
- */
 
     //LOGOUT --------------------------------------------------------------------------------------------------------------
     const logout = () => {
@@ -117,24 +95,26 @@ const AuthContext = (props) => {
     };
 
     //UPDATE --------------------------------------------------------------------------------------------------------------
-    const update = async (nickname) => {
+    const updateUser = async (nickname, picture, profiletext) => {
       try {
-        const body = { nickname };
-        const response = await fetch(`http://localhost:5000/user/${user.user_id}`, {
+        const body = { nickname, picture, profiletext };
+        const settings = {
           method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(body),
-        });
+          headers: { "Authorization": `Bearer ${StorageItem}`, "Content-Type": "application/json" },
+          body: JSON.stringify(body)
+        }
+        const response = await fetch(`http://localhost:5000/users/update`, settings);
+        const jsonData = await response.json();
+        console.log('fetched data from the updated user route >>>', jsonData);
+        getName();
       } catch (error) {
         console.log(error.message);
       } 
-      /* getUser(); */
-      setUser({ ...user, nickname: nickname });
     }
 
   return (
     <div>
-      <authContext.Provider value={{ user, isLoggedIn, registration, newlogin, /* loginToken, */ logout, update }}>
+      <authContext.Provider value={{ user, isLoggedIn, registration, newlogin, /* loginToken, */ logout, updateUser }}>
         {props.children}
       </authContext.Provider>
     </div>

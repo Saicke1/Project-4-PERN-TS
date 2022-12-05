@@ -1,0 +1,30 @@
+.registerOverwrap{
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 75vh;
+}
+
+.registerContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 95%;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.formRegisterStyle{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+#registerBtn{
+    background-color: #b71e3f;
+    margin-bottom: 10px;
+}

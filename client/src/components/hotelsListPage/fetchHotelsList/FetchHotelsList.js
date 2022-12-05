@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "./FetchHotelsList.css";
 import { Link } from "react-router-dom";
-import EditHotel from "../editHotel/EditHotel.js";
-import FavIcon from "../favoriteIcon/FavIcon";
+import FavIcon from "../../favoriteIcon/FavIcon";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -10,26 +9,11 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import StarIcon from '@mui/icons-material/Star';
 import HorizontalRuleIcon from '@mui/icons-material/HorizontalRule';
+import { authContext } from "../../context/AuthContext";
 
 const FetchHotelsList = () => {
   const [hotels, setHotels] = useState([]);
-
-  //delete function
-  const deleteHotel = async (id) => {
-    try {
-      const deleteHotel = await fetch(`http://localhost:5000/hotel/${id}`, {
-        method: "DELETE",
-      });
-
-      /* console.log(deleteHotel); */
-      if (deleteHotel.ok) {
-        /* setHotels(hotels.filter(each => each.hotelid !== id)); */
-        getHotels();
-      }
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
+  const { isLoggedIn } = useContext(authContext);
 
   //get all Hotels
   const getHotels = async () => {
@@ -74,7 +58,7 @@ const FetchHotelsList = () => {
         <Link to={`/details/${hotel.hotelid}`} className="linkStyle">
           <Button variant="contained" style={{ backgroundColor: "#b71e3f" }}>Show More</Button>
         </Link>
-        <FavIcon id={hotel.hotelid}/>
+        {isLoggedIn ? <FavIcon id={hotel.hotelid}/> : <></>}
       </div>
     </Card>
     );

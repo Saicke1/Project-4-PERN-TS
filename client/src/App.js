@@ -1,3 +1,4 @@
+import React, { useContext } from "react";
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@material-ui/core/styles";
@@ -10,9 +11,12 @@ import DetailsPage from "./components/detailsPage/DetailsPage";
 import LogoutPage from "./components/userPages/logoutPage/LogoutPage";
 import LoginPage from "./components/userPages/loginPage/LoginPage";
 import RegistrationPage from "./components/userPages/registrationPage/RegistrationPage";
-import AuthContext from "./components/context/AuthContext";
 import UpdatePage from "./components/userPages/updatePage/UpdatePage";
 import CommentContext from "./components/context/CommentContext";
+import { authContext } from "./components/context/AuthContext";
+import FavoriteContext from "./components/context/FavoriteContext";
+import Favoritepage from "./components/userPages/favoritePage/FavoritePage";
+/* import AuthContext from "./components/context/AuthContext"; */
 /* import AuthContextTS from "./components/context/AuthContextTS.tsx"; */
 
 const theme = createTheme({
@@ -22,12 +26,16 @@ const theme = createTheme({
 });
 
 function App() {
+  const { isLoggedIn } = useContext(authContext);
+  console.log('isLoggedIn from App.js', isLoggedIn);
+
   return (
     <ThemeProvider theme={theme}>
       <div className="AppContainer">
-        <AuthContext>
+        {/* <AuthContext> */}
           <CommentContext>
         {/* <AuthContextTS> */}
+        <FavoriteContext>
           <Routes>
             <Route path="/" element={<Layout />}>
               <Route index element={<Homepage />} />
@@ -38,12 +46,14 @@ function App() {
               <Route path="login" element={<LoginPage/>} />
               <Route path="registration" element={<RegistrationPage/>} />
               <Route path="update" element={<UpdatePage/>} />
+              <Route path="favorites" element={<Favoritepage/>} />
               <Route path="*" element={<NoPage />} />
             </Route>
           </Routes>
+        </FavoriteContext>
         {/* </AuthContextTS> */}
         </CommentContext>
-        </AuthContext>
+        {/* </AuthContext> */}
       </div>
     </ThemeProvider>
   );
