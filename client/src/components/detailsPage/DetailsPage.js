@@ -34,7 +34,6 @@ const DetailsPage = () => {
   const [hotel, setHotel] = useState([]);
   const { hotel_id } = useParams();
   const url = "http://localhost:5000";
-  /* console.log('hotelId', hotel_id); */
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -46,17 +45,13 @@ const getOneHotel = async () => {
   try {
     const response = await fetch(`${url}/hotel/${hotel_id}`);
     const jsonData = await response.json();
-    /* console.log('jsonData', jsonData); */
     setHotel(jsonData);
   } catch (error) {
     console.log(error.message);
   }
 };
-
   getOneHotel();
 }, [hotel_id]);
-  
-/* console.log('hotel', hotel); */
 
   return (
     <div className="detailsContainer">

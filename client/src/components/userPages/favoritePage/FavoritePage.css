@@ -14,3 +14,43 @@
     width: 100%;
     gap: 10px;
 }
+
+.cardActionPosition{
+    display: flex;
+    justify-content: space-between;
+}
+
+.blobs-container {
+    color: white;
+}
+
+.blob {
+	background: #b71e3f;
+	border-radius: 10px;
+	margin: 10px;
+	height: 50px;
+	width: 200px;
+    display: flex;
+    align-items: center;
+
+    box-shadow: 0 0 0 0 #b71e3f6f;
+	transform: scale(1);
+	animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+	0% {
+		transform: scale(0.95);
+		box-shadow: 0 0 0 0 #b71e3f6f;
+	}
+
+	70% {
+		transform: scale(1);
+		box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+	}
+
+	100% {
+		transform: scale(0.95);
+		box-shadow: 0 0 0 0 #b71e3f6f;
+	}
+}

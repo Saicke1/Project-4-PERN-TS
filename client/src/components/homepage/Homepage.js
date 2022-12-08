@@ -5,14 +5,8 @@ import HeaderCard from "./headerCard/HeaderCard";
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import CoronaBox from "./coronaBox/CoronaBox";
-/* import { useAuth }  from "../context/AuthContextTS"; */
 
 const Homepage = () => {
-
-  /* const {loggedIn} = useAuth();
-
-  console.log('loggedIn', loggedIn); */
-
   return (
     <div className="homepageContainer">
       <h3>Welcome to</h3>

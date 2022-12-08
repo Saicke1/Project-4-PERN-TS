@@ -65,7 +65,7 @@ export const getAllUsers = async (req, res) => {
   
     //5. insert the new user and his data into the database
           client
-            .query(`INSERT INTO users (nickname, email, password) VALUES ($1,$2,$3)`, [user.nickname, user.email, user.password], (err) => {
+            .query(`INSERT INTO users (nickname, email, password, profiletext) VALUES ($1,$2,$3,$4)`, [user.nickname, user.email, user.password, 'Here could stand your welcome text.'], (err) => {
     //6. if insert is failing, throw error
               if (err) {
                 console.error(err);

@@ -24,7 +24,6 @@ const FetchHotelsList = () => {
         (objA, objB) => Number(objA.hotelid) - Number(objB.hotelid)
       );
       setHotels(sortData);
-      console.log(jsonData);
     } catch (error) {
       console.log(error.message);
     }

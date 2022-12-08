@@ -18,6 +18,13 @@
     border-radius: 10px;
 }
 
+.profileDisplay{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
 #nicknameBadge{
     background-color: #b71e3f;
     color: white;
@@ -41,7 +48,7 @@
     border-radius: 5px;
     margin-top: 15px;
     margin-bottom: 25px;
-    width: 80%;
+    width: 100%;
 }
 
 #iconButtonposition{

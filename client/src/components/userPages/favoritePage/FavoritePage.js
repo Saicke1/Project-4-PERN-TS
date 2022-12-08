@@ -9,6 +9,8 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import FavIcon from '../../favoriteIcon/FavIcon';
 import { Link } from "react-router-dom";
+import StarIcon from '@mui/icons-material/Star';
+import HorizontalRuleIcon from '@mui/icons-material/HorizontalRule';
 
 const Favoritepage = () => {
     const { getHotelDataFavs, hotelDataFavs } = useContext(userFavContext);
@@ -27,8 +29,8 @@ const Favoritepage = () => {
         <div className='FavoriteList'>
         {hotelDataFavs && hotelDataFavs.map((each, index) => {
         return (
-                <Card sx={{ maxWidth: 345 }}>
-                    <Link to={`/details/${each.hotelid}`} className="linkStyle" id={each.hotel_id}>
+                <Card sx={{ maxWidth: 345 }} key={each.fav_id}>
+                    <Link to={`/details/${each.hotelid}`} className="linkStyle">
                     <CardMedia
                         component="img"
                         height="140"
@@ -41,12 +43,14 @@ const Favoritepage = () => {
                         {each.hotelname}
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
-                        Lizards are a widespread group of squamate reptiles, with over 6,000
-                        species, ranging across all continents except Antarctica
+                        Stars: {each.hotelstars} <StarIcon id="starIcon"/> <HorizontalRuleIcon/> Rooms: {each.hotelrooms}
                         </Typography>
                     </CardContent>
-                    <CardActions>
+                    <CardActions className='cardActionPosition'>
                         <FavIcon id={each.hotelid}/>
+                        <div class="blobs-container">
+                            <div class="blob red">Click on the Picture for more informations.</div>
+                        </div>
                     </CardActions>
                 </Card>
             )})}

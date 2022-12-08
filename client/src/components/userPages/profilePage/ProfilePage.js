@@ -8,7 +8,6 @@ import Box from '@mui/material/Box';
 import Fab from '@mui/material/Fab';
 import IconButton from '@mui/material/IconButton';
 import EditIcon from '@mui/icons-material/Edit';
-/* import { useAuth } from "../../context/AuthContext.tsx"; */
 
 const ProfilePage = () => {
   const { user, isLoggedIn } = useContext(authContext);
@@ -16,34 +15,34 @@ const ProfilePage = () => {
   return (
     <div className='profileOverwrap'>
       <div className="profileContainer">
+        <Link to="/update">
+          <IconButton aria-label="update" id="iconButtonposition">
+            <EditIcon fontSize="inherit" id='profilePicUpdateButton'/>
+          </IconButton>
+        </Link>
         <Typography variant="h4" gutterBottom style={{ marginTop: "10px" }}>
         Welcome Back
         </Typography>
-
-        {user && <div>
-          <Link to="/update">
-              <IconButton aria-label="update" id="iconButtonposition">
-                <EditIcon fontSize="inherit" id='profilePicUpdateButton'/>
-              </IconButton>
-            </Link>
+        {user &&
+        <div className="profileDisplay">
           <Box sx={{ '& > :not(style)': { m: 1 } }}>
             <Fab variant="extended" id="nicknameBadge">
               {user.nickname}
             </Fab>
           </Box>
           {user.picture ?
-          <div className="imageContainer">
-            <img alt="profilepic" src={user.picture} className="profilePic"/>
-          </div> :
-          <div className="imageContainer">
-            <img alt="dummypic" src={dummyPic} className="profilePic"/>
-            </div>}
-        </div>}
-            <div className="profileText">
-              {user.profiletext ?
-              <p>{user.profiletext}</p>
-            : <p>Here could stand your welcome text.</p>}
+            <div className="imageContainer">
+              <img alt="profilepic" src={user.picture} className="profilePic"/>
+            </div> :
+            <div className="imageContainer">
+              <img alt="dummypic" src={dummyPic} className="profilePic"/>
             </div>
+          }
+          <div className="profileText">
+            <p>{user.profiletext}</p>
+          </div>
+        </div>}
+            
       </div>
     </div>);
 };

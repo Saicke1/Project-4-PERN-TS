@@ -1,5 +1,4 @@
 import React, { createContext, useState, useEffect } from 'react';
-/* import { redirect } from "react-router-dom"; */
 
 const url = "http://localhost:5000";
 
@@ -20,40 +19,26 @@ const AuthContext = (props) => {
     try {
       const response = await fetch(`${url}/users/profile`, fetchSettings);
       const data = await response.json();
-      /* console.log('data', data); */
       setUser(data);
     } catch (error) {
       console.log('error.message', error.message);
       console.log("Server error, name couldn't be fetched.");
     }
-  }
+  };
 
   useEffect(() => {
     getName();
   }, []);
 
   useEffect(() => {
-    if(user !== null){
-      setIsLoggedIn(true);
-      console.log("UseEffect have set the loggin to true.")
-    } else {
-      setIsLoggedIn(false);
-      console.log("UseEffect have set the loggin to false.")}
-  }, [user]);
-  
-
-  useEffect(() => {
     if(localStorage.getItem("token")){
       console.log("Your token is still there.");
-     /*  setUser(null);
-      setIsLoggedIn(null);
-      <redirect to="/" /> */
+      setIsLoggedIn(true);
+      console.log("UseEffect have set the loggin to true.");
     } else{
       console.log("The localstorage was erased.");
     }
-  }, [StorageItem])
-  
-  
+  }, [StorageItem]);
 
   //REGISTRATION --------------------------------------------------------------------------------------------------------
   const registration = async (nickname, email, password) => {
@@ -66,7 +51,6 @@ const AuthContext = (props) => {
     /* in res.json() wird durch backend wird bestimmt, dass ich success, email und jwt bekomme*/
     const { success, error, jwt } = await res.json();
     localStorage.setItem("token", jwt);
-    /* setUser({ email }); */
     getName();
     setIsLoggedIn(true);
     return { success, error }
@@ -105,7 +89,6 @@ const AuthContext = (props) => {
         }
         const response = await fetch(`http://localhost:5000/users/update`, settings);
         const jsonData = await response.json();
-        console.log('fetched data from the updated user route >>>', jsonData);
         getName();
       } catch (error) {
         console.log(error.message);
@@ -114,7 +97,7 @@ const AuthContext = (props) => {
 
   return (
     <div>
-      <authContext.Provider value={{ user, isLoggedIn, registration, newlogin, /* loginToken, */ logout, updateUser }}>
+      <authContext.Provider value={{ user, isLoggedIn, registration, newlogin, logout, updateUser }}>
         {props.children}
       </authContext.Provider>
     </div>

@@ -19,7 +19,6 @@ const FavoriteContext = (props) => {
             };
             const response = await fetch(`${url}/favorites/hotelfavs`, requestOptions);
             const jsonData = await response.json();
-            console.log('fetched data of favorites >>>', jsonData);
             jsonData.map(each => {
               newArray.push(each.hotel_id);
             })
@@ -43,7 +42,6 @@ const FavoriteContext = (props) => {
         };
         const response = await fetch(`${url}/favorites/create`, requestOptions);
         const jsonData = await response.json();
-        console.log('jsonData', jsonData);
         getMyFavorites();
         getHotelDataFavs();
       } catch (error) {
@@ -65,7 +63,6 @@ const FavoriteContext = (props) => {
         };
         const response = await fetch(`${url}/favorites/remove`, requestOptions);
         const jsonData = await response.json();
-        console.log('jsonData', jsonData);
         getMyFavorites();
         getHotelDataFavs();
       } catch (error) {
@@ -83,7 +80,6 @@ const FavoriteContext = (props) => {
       };
       const response = await fetch(`${url}/favorites/hoteldata`, requestOptions);
       const jsonData = await response.json();
-      console.log('hoteldata favorites >>>', jsonData);
       setHotelDataFavs(jsonData);
       } catch (error) {
         console.log('error.message', error.message);
@@ -93,7 +89,8 @@ const FavoriteContext = (props) => {
 
   return (
     <div>
-      <userFavContext.Provider value={{ favoriteIds, addFavorites, removeFavorite, getMyFavorites, getHotelDataFavs, hotelDataFavs }}>
+      <userFavContext.Provider value={{
+        favoriteIds, addFavorites, removeFavorite, getMyFavorites, getHotelDataFavs, hotelDataFavs }}>
         {props.children}
       </userFavContext.Provider>
     </div>

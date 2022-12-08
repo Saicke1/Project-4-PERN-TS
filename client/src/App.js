@@ -16,8 +16,7 @@ import CommentContext from "./components/context/CommentContext";
 import { authContext } from "./components/context/AuthContext";
 import FavoriteContext from "./components/context/FavoriteContext";
 import Favoritepage from "./components/userPages/favoritePage/FavoritePage";
-/* import AuthContext from "./components/context/AuthContext"; */
-/* import AuthContextTS from "./components/context/AuthContextTS.tsx"; */
+import CommentPage from "./components/userPages/commentPage/CommentPage";
 
 const theme = createTheme({
   typography: {
@@ -32,10 +31,8 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <div className="AppContainer">
-        {/* <AuthContext> */}
           <CommentContext>
-        {/* <AuthContextTS> */}
-        <FavoriteContext>
+          <FavoriteContext>
           <Routes>
             <Route path="/" element={<Layout />}>
               <Route index element={<Homepage />} />
@@ -47,13 +44,12 @@ function App() {
               <Route path="registration" element={<RegistrationPage/>} />
               <Route path="update" element={<UpdatePage/>} />
               <Route path="favorites" element={<Favoritepage/>} />
+              <Route path="comments" element={<CommentPage/>}/>
               <Route path="*" element={<NoPage />} />
             </Route>
           </Routes>
         </FavoriteContext>
-        {/* </AuthContextTS> */}
         </CommentContext>
-        {/* </AuthContext> */}
       </div>
     </ThemeProvider>
   );

@@ -6,9 +6,9 @@ import { authorizationToken } from "../middleware/authorization.js";
 
 const router = express.Router();
 
-router.get("/all/:id", authMiddleware, getAllComments);
+router.get("/all/:id",/*  authMiddleware, */ getAllComments);
 router.post("/create", jwtAuth, createComment);
-router.get("/oneuser", authMiddleware, commentsFromOneUser);
+router.get("/oneuser", jwtAuth, commentsFromOneUser);
 router.put("/update", jwtAuth, updateComment);
 router.delete("/delete", jwtAuth, deleteComment);
 

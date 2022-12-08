@@ -6,6 +6,7 @@ import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Typography from "@material-ui/core/Typography";
 import Button from '@mui/material/Button';
+import FormHelperText from '@mui/material/FormHelperText';
 
 const LoginPage = () => {
 
@@ -18,7 +19,6 @@ const LoginPage = () => {
   }
 
   const handleLogin = async () => {
-
     const { success, error } = await newlogin(email, password);
     if (success) {
       console.log("User is logged in successfully.");
@@ -34,39 +34,42 @@ const LoginPage = () => {
         <Typography variant="h4" gutterBottom style={{ marginTop: "10px" }}>
         Good to see you again
         </Typography>
-        <form onSubmit={handleSubmit} className="formStyle">
-          <Box sx={{ '& > :not(style)': { m: 1, width: '25ch' }, }}
+          <Box
+            onSubmit={handleSubmit}
+            component="form"
+            sx={{
+              '& .MuiTextField-root': { m: 1, width: '25ch' },
+            }}
             noValidate
             autoComplete="off"
+            className='formBox' /* deklariert in RegistrationPage css */
           >
           <TextField
-            id="filled-basic"
+            required
+            id="outlined-required"
             label="email"
             placeholder=""
-            multiline
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
           <TextField
-            id="filled-basic"
+            required
+            id="outlined-required"
             label="password"
             placeholder=""
-            multiline
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          </Box>
-
+          <FormHelperText id="my-helper-text">* required</FormHelperText>
           <Link to="/profile" style={{ textDecoration: "none" }}>
             <Button variant="contained" onClick={handleLogin} id="loginBtn">
               Sign In
             </Button>
           </Link>
-
+          </Box>
           <Link to="/registration" style={{ textDecoration: "none", marginBottom: "10px" }}>
             Have no Account yet? Please Sign Up.
           </Link> 
-        </form>
       </div>
     </div>
   )

@@ -8,19 +8,18 @@ const CommentContext = (props) => {
 
     const [stars, setStars] = useState(0);
     const [comments, setComments] = useState([]);
+    const [myComments, setMyComments] = useState([]);
     const getToken = localStorage.getItem("token");
 
     //GET ALL THE COMMENTS
     const getAllComments = async (hotel_id) => {
       try {
         const requestOptions = {
-          method: 'GET',
-          headers: {"Authorization": `Bearer ${getToken}`}
+          method: 'GET'
         };
   
         const response = await fetch(`http://localhost:5000/comments/all/${hotel_id}`, requestOptions);
         const jsonData = await response.json();
-        console.log('fetched data from the new comments route >>>', jsonData);
         setComments(jsonData);
       } catch (error) {
           console.log('error.message', error.message);
@@ -47,7 +46,6 @@ const CommentContext = (props) => {
 
         const response = await fetch(`${url}/comments/create`, Settings);
         const jsonData = await response.json();
-        console.log('jsonData', jsonData);
         setStars(0);
         getAllComments(hotel_id.toString());
       } catch (error) {
@@ -69,7 +67,6 @@ const CommentContext = (props) => {
 
         const response = await fetch(`${url}/comments/delete`, settings);
         const jsonData = await response.json();
-        console.log('jsonData', jsonData);
         getAllComments(hotel_id);
       } catch (error) {
         console.log('error.message', error.message);
@@ -95,18 +92,42 @@ const CommentContext = (props) => {
 
         const response = await fetch(`${url}/comments/update`, settings);
         const jsonData = await response.json();
-        console.log('jsonData', jsonData);
         getAllComments(hotel_id);
+        commentFromOneUser();
       } catch (error) {
         console.log('error.message', error.message);
         console.log("The comment wasn't updatet. Something went wrong.");
       }
-      
+    };
+
+    //COMMENTS FROM ONLY ONE USER
+    const commentFromOneUser = async () => {
+      try {
+            const requestOptions = {
+                method: 'GET',
+                headers: {"Authorization": `Bearer ${getToken}`}
+            };
+            const response = await fetch(`${url}/comments/oneuser`, requestOptions);
+            const jsonData = await response.json();
+            setMyComments(jsonData);
+      } catch (error) {
+        console.log('error.message', error.message);
+        console.log("The comments wasn't found. Something went wrong.");
+      }
     }
 
   return (
     <div>
-      <userCommentsContext.Provider value={{ stars, setStars, comments, getAllComments, createComment, deleteComment, updateComment }}>
+      <userCommentsContext.Provider value={{
+        stars,
+        setStars,
+        comments,
+        getAllComments,
+        createComment,
+        deleteComment,
+        updateComment,
+        commentFromOneUser,
+        myComments }}>
         {props.children}
       </userCommentsContext.Provider>
     </div>

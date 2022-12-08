@@ -5,10 +5,11 @@ import client from "../dbConfig.js";
 export const getAllComments = async (req, res) => {
   const { id } = req.params;
     try {
-      const users = await client.query(`SELECT users.user_id, email , nickname , picture , comment_id, comment_text, comment_title, rating, comment_date
+      const users = await client.query(`SELECT users.user_id,
+      email , nickname , picture , comment_id, comment_text, comment_title, rating, comment_date
       FROM comments , users
       WHERE comments.hotel_id = $1 AND users.user_id = comments.user_id
-      ORDER BY comments.comment_date`, [id]);
+      ORDER BY comments.comment_date DESC`, [id]);
       res.status(200).json(
         users.rows,
       );
@@ -66,12 +67,12 @@ export const getAllComments = async (req, res) => {
     //GET COMMENTS WRITTEN FROM ONE USER
     export const commentsFromOneUser = async (req, res) => {
       try {
-        console.log('req', req.payload.email);
         const userComments = await client.query(`SELECT users.user_id, users.email, users.nickname, users.picture,
         comments.comment_id, comments.comment_text, comments.rating, comments.comment_date, comments.comment_title,
         comments.hotel_id FROM users
         JOIN comments ON users.user_id = comments.user_id
-        WHERE email = $1;`, [req.payload.email]);
+        WHERE email = $1
+        ORDER BY comments.hotel_id`, [req.user.email]);
         console.log('userComments', userComments);
         res.json(userComments.rows);
       } catch (error) {

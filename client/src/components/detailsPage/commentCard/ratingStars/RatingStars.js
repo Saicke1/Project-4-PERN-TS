@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import "./RatingStars.css";
 import Box from '@mui/material/Box';
 import Rating from '@mui/material/Rating';
 import { userCommentsContext } from '../../../context/CommentContext';

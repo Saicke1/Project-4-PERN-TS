@@ -14,8 +14,6 @@ const UpdatePage = () => {
   const [picture, setPicture] = useState(user.picture);
   const [nickname, setNickname] = useState(user.nickname);
 
-  console.log('user on update page', user);
-
   function handleSubmit(e){
     e.preventDefault();
   };

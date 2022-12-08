@@ -14,6 +14,7 @@ import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import CommentIcon from '@mui/icons-material/Comment';
   
 
 const Footer = () => {
@@ -50,6 +51,13 @@ const Footer = () => {
             <AccountBoxIcon fontSize="inherit" />
           </Link>}
         </div>
+
+        {isLoggedIn ?
+          <div className="profilePosition"><h4>Your Comments</h4>
+          <Link to="/comments" className="icons">
+            <CommentIcon fontSize="inherit" />
+          </Link></div> : <></>}
+
           {isLoggedIn ?
           <div className="profilePosition"><h4>Favorites</h4>
           <Link to="/favorites" className="icons">
@@ -77,7 +85,6 @@ const Footer = () => {
 
   return (
     <div className="footerContainer">
-      { console.log("Is there an infinite loop?") }
       <div className="icons">
         <ReplyIcon onClick={() => navigate(-1)} fontSize="inherit" />
       </div>

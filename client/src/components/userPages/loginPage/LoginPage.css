@@ -17,11 +17,9 @@
     border-radius: 10px;
 }
 
-.formStyle{
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
+#my-helper-text{
+    margin: 0;
+    width: 90%;
 }
 
 #loginBtn{
