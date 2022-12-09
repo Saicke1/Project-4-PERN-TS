@@ -19,12 +19,12 @@ const CommentCard = () => {
   };
 
   return (
-    <div>
+    <div style={{ width: "100%" }}>
       <Box>
         
         <div>
           <Collapse in={checked} collapsedSize={320}>
-            <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+            <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper', borderRadius: "10px" }}>
             <FormControlLabel
               control={<Switch checked={checked} onChange={handleChange} />}
               label="All Comments"

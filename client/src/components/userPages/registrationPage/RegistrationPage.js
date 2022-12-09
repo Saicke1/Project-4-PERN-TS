@@ -21,11 +21,11 @@ const RegistrationPage = () => {
 
   const handleRegistration = async (e) => {
     e.preventDefault();
+    setAlerting(false);
     if(password.length < 6){
       setAlerting(true);
       console.log("Password is too short.");
     } else {
-      setAlerting(false);
       try {
         registration(nickname, email, password);
         navigate("/profile");

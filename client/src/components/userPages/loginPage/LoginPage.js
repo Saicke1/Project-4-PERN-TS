@@ -58,6 +58,7 @@ const LoginPage = () => {
             label="password"
             placeholder=""
             value={password}
+            type="password"
             onChange={(e) => setPassword(e.target.value)}
           />
           <FormHelperText id="my-helper-text">* required</FormHelperText>

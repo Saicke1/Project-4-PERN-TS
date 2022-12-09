@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./DetailsPage.css";
 import TypographyMine from "@material-ui/core/Typography";
 import { useParams } from "react-router-dom";
+import { authContext } from "../context/AuthContext";
 
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
@@ -34,6 +35,7 @@ const DetailsPage = () => {
   const [hotel, setHotel] = useState([]);
   const { hotel_id } = useParams();
   const url = "http://localhost:5000";
+  const { isLoggedIn } = useContext(authContext);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -81,7 +83,7 @@ const getOneHotel = async () => {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-          <FavIcon id={hotel.hotelid}/>
+          {isLoggedIn ? <FavIcon id={hotel.hotelid}/> : <></>}
         <IconButton aria-label="share">
           <ShareIcon />
         </IconButton>
