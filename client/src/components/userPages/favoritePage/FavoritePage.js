@@ -48,8 +48,8 @@ const Favoritepage = () => {
                     </CardContent>
                     <CardActions className='cardActionPosition'>
                         <FavIcon id={each.hotelid}/>
-                        <div class="blobs-container">
-                            <div class="blob red">Click on the Picture for more informations.</div>
+                        <div className="blobs-container">
+                            <div className="blob red">Click on the Picture for more informations.</div>
                         </div>
                     </CardActions>
                 </Card>

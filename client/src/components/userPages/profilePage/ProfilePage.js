@@ -10,7 +10,7 @@ import IconButton from '@mui/material/IconButton';
 import EditIcon from '@mui/icons-material/Edit';
 
 const ProfilePage = () => {
-  const { user, isLoggedIn } = useContext(authContext);
+  const { user } = useContext(authContext);
   
   return (
     <div className='profileOverwrap'>

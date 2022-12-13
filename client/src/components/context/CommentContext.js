@@ -1,6 +1,7 @@
 import React, { createContext, useState } from 'react';
 
-const url = "http://localhost:5000";
+/* const url = "http://localhost:5000"; */
+const url = "https://pern-delta.vercel.app";
 
 export const userCommentsContext = createContext();
 
@@ -18,7 +19,7 @@ const CommentContext = (props) => {
           method: 'GET'
         };
   
-        const response = await fetch(`http://localhost:5000/comments/all/${hotel_id}`, requestOptions);
+        const response = await fetch(`${url}/comments/all/${hotel_id}`, requestOptions);
         const jsonData = await response.json();
         setComments(jsonData);
       } catch (error) {

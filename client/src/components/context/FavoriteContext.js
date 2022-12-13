@@ -1,6 +1,7 @@
 import React, { createContext, useState } from 'react';
 
-const url = "http://localhost:5000";
+/* const url = "http://localhost:5000"; */
+const url = "https://pern-delta.vercel.app";
 
 export const userFavContext = createContext();
 

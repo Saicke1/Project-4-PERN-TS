@@ -34,7 +34,8 @@ const DetailsPage = () => {
   const [expanded, setExpanded] = React.useState(false);
   const [hotel, setHotel] = useState([]);
   const { hotel_id } = useParams();
-  const url = "http://localhost:5000";
+  /* const url = "http://localhost:5000"; */
+  const url = "https://pern-delta.vercel.app";
   const { isLoggedIn } = useContext(authContext);
 
   const handleExpandClick = () => {

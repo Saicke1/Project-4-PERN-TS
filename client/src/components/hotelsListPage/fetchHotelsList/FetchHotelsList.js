@@ -18,7 +18,7 @@ const FetchHotelsList = () => {
   //get all Hotels
   const getHotels = async () => {
     try {
-      const response = await fetch("http://localhost:5000/hotel/all");
+      const response = await fetch("https://pern-delta.vercel.app/hotel/all");
       const jsonData = await response.json();
       const sortData = await jsonData.sort(
         (objA, objB) => Number(objA.hotelid) - Number(objB.hotelid)

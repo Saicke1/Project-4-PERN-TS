@@ -1,6 +1,7 @@
 import React, { createContext, useState, useEffect } from 'react';
 
-const url = "http://localhost:5000";
+/* const url = "http://localhost:5000"; */
+const url = "https://pern-delta.vercel.app";
 
 export const authContext = createContext();
 
@@ -87,7 +88,7 @@ const AuthContext = (props) => {
           headers: { "Authorization": `Bearer ${StorageItem}`, "Content-Type": "application/json" },
           body: JSON.stringify(body)
         }
-        const response = await fetch(`http://localhost:5000/users/update`, settings);
+        const response = await fetch(`${url}/users/update`, settings);
         const jsonData = await response.json();
         getName();
       } catch (error) {

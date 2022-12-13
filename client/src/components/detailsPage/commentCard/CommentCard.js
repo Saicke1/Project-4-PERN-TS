@@ -19,7 +19,7 @@ const CommentCard = () => {
   };
 
   return (
-    <div style={{ width: "100%" }}>
+    <div style={{ width: "100%", justifyContent: "center", display: "flex" }}>
       <Box>
         
         <div>
